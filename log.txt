@@ -1,0 +1,7 @@
+2026-02-14 09:12:01 INFO Server started on port 8080
+2026-02-14 09:13:45 INFO User login success - unserId=choi01 - IP=192.168.0.12
+2026-02-14 09:16:33 WARN High memory usage detected - usaged=82%
+2026-02-14 09:16:50 ERROR Database connection timeout - host=db-prod-p1
+2026-02-14 09:17:10 INFO Retrying database connection...
+2026-02-14 09:17:15 INFO Database connection restored
+2026-02-14 09:19:35 ERROR Failed to load configuration file - config.yml
