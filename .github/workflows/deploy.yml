@@ -1,0 +1,21 @@
+name: Deploy to EC2
+
+on:
+ push:
+  branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH to EC2 and deploy
+    	uses: actions/ssh-action@v1
+        with:
+  	  host: ${{ secrets.EC2_HOST }}
+	  username: ec2-user
+	  key: ${{ secrets.EC2_KEY }}
+	  scripts: |
+	    cd /usr/share/nginx/html
+	    git pull origin main
+	    sudo systemctl reload nginx
