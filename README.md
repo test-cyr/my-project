@@ -10,4 +10,4 @@ This project demonstrates setting up a basic CI/CD pipeline for a static website
 - Basic CI/CD workflow configuration with GitHub Actions
 
 ## Screenshots
-![Workflow Screenshot] (screenshots/workflow.png)
+![Workflow Screenshot] (./screenshots/workflow.png)
