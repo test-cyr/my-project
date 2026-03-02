@@ -11,3 +11,16 @@ This project demonstrates setting up a basic CI/CD pipeline for a static website
 
 ## Screenshots
 ![Workflow Screenshot](./screenshots/workflow.png)
+![Deployed Website](./screenshots/website.png)
+
+## Steps Completed
+1. SSH access to EC2 instance
+2. Nginx installation and verification
+3. Server folder initialized as Git repository (git init + remote add)
+4. GitHub Actions workflow created and linked to EC2
+5. Local changes pushed and automatically deployed to server
+
+## Next Steps
+- Dockerize the web application
+- Extend workflow for multi-branch deployment
+- Explore CI/CD testing steps
