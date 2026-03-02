@@ -13,9 +13,9 @@ jobs:
         uses: actions/ssh-action@v1.0.0
         with:
           host: "${{ secrets.EC2_HOST }}"
-	  username: ec2-user
-	  key: "${{ secrets.EC2_KEY }}"
-	  script: |
-	    cd /usr/share/nginx/html
-	    git pull origin main
-	    sudo systemctl reload nginx
+          username: ec2-user
+          key: "${{ secrets.EC2_KEY }}"
+          script: |
+            cd /usr/share/nginx/html
+            git pull origin main
+            sudo systemctl reload nginx
