@@ -10,12 +10,12 @@ jobs:
 
     steps:
       - name: SSH to EC2 and deploy
-        uses: actions/ssh-action@v1
+        uses: actions/ssh-action@v1.0.0
         with:
   	  host: ${{ secrets.EC2_HOST }}
 	  username: ec2-user
 	  key: ${{ secrets.EC2_KEY }}
-	  scripts: |
+	  script: |
 	    cd /usr/share/nginx/html
 	    git pull origin main
 	    sudo systemctl reload nginx
