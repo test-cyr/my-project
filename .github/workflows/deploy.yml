@@ -12,8 +12,8 @@ jobs:
       - name: SSH to EC2 and deploy
         uses: actions/ssh-action@v1.0.0
         with:
-  	  host: "${{ secrets.EC2_HOST }}"
-	  usiername: ec2-user
+          host: "${{ secrets.EC2_HOST }}"
+	  username: ec2-user
 	  key: "${{ secrets.EC2_KEY }}"
 	  script: |
 	    cd /usr/share/nginx/html
