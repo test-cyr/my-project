@@ -82,6 +82,10 @@ what I did
 ![Docker Success_Screenshot](./screenshots/dockertest.png)
 ![Success Nginx](./screenshots/docker_start_nginx.png)
 ![Success Website](./screenshots/docker_website.png)
+![DockerFile_Screenshot](./screenshots/dockerfile.png)
+![Docker_Build](./screenshots/docker-build.png)
+![Docker_Run](./screenshots/docker-ps.png)
+![Docker_Browsesr](./screenshots/docker-browser.png)
 
 ## What I Learned
 - Linux server management
