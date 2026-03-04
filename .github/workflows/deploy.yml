@@ -7,15 +7,28 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: SSH to EC2 and deploy
-        uses: appleboy/ssh-action@v1.0.0
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Copy files to EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: "${{ secrets.EC2_HOST }}"
+          username: ec2-user
+          key: "${{ secrets.EC2_KEY }}"
+          source: "."
+          target: "/home/ec2-user/project"
+
+      - name: Build and run Docker on EC2
+        uses: appleboy/ssh-action@v0.1.7
         with:
           host: "${{ secrets.EC2_HOST }}"
           username: ec2-user
           key: "${{ secrets.EC2_KEY }}"
           script: |
-            cd /usr/share/nginx/html
-            git pull origin main
-            sudo systemctl reload nginx
+            cd /home/ec2-user/project
+            docker stop project || true
+            docker rm project || true
+            docker build -t project .
+            docker run -d -p 80:80 --name project project
