@@ -95,21 +95,65 @@ Ensures updates website always live
 ### What I did
 - Created GitHub Actions workflow for automatic deployment
 - Connected SSH key to EC2
-- Pushed code changes to GitHub
-- Confirmed website updated automatically on EC2 via Docker
-- Captured workflow logs and updated browser screen
+- Sent project files to EC2 using scp-action
+- Built and ran the Docker container on the server
+- Confirmed the website is live on the EC2 IP address
+
+## Workflow file
+.github/workflows/deploy.yml
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Copy files to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: "${{ secrets.EC2_HOST }}"
+          username: ec2-user
+          key: "${{ secrets.EC2_KEY }}"
+          source: "."
+          target: "/home/ec2-user/project"
+
+      - name: Build and run Docker on EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: "${{ secrets.EC2_HOST }}"
+          username: ec2-user
+          key: "${{ secrets.EC2_KEY }}"
+          script: |
+            cd /home/ec2-user/project
+
+            # 기존 컨테이너 제거
+            docker stop project || true
+            docker rm project || true
+
+            # Docker build & run
+            docker build -t project .
+            docker run -d -p 8080:80 --name project project
 
 ## Screenshots
-![Docker Success_Screenshot](./screenshots/dockertest.png)
+![CI/CD_GitHubActions](./screenshots/github-actions.png)
+![Security_Group_Set](./screenshots/security-group.png)
+![Docker Success_Browser](./screenshots/browser-updated.png)
 
 ## What I Learned
 - Linux server management
 - SSH remote access
 - Nginx setup
 - Git workflow
-- CI/CD automation
+- CI/CD automation with GitHub Actions
 - Docker containerization
 - Real-world deployment process
+- AWS Security Group settings (Opening port 8080)
 
 ## Next Steps (Planned)
 - Docker Compose
