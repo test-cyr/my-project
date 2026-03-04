@@ -27,8 +27,17 @@ jobs:
           username: ec2-user
           key: "${{ secrets.EC2_KEY }}"
           script: |
+            mkdir -p /home/ec2-user/project
+
+            # GitHub Actions runner에서 EC2로 파일 copy
+            scp -r $GITHUB_WORKSPACE/* ec2-user@{{ secrets.EC2_HOST }}:/home/ec2-user/project
+            
             cd /home/ec2-user/project
+
+            # 기존 컨테이너 제거
             docker stop project || true
             docker rm project || true
+
+            # Docker build & run
             docker build -t project .
             docker run -d -p 80:80 --name project project
