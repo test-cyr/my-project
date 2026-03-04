@@ -10,7 +10,7 @@ Learn how real-world engineers deploy web services using:
 Instead of manual uploads, I practiced automated deployments step-by-step
 
 ## DAY 1 - Nginx Manual Deployment
-what I did
+### What I did
 - Created EC2 (Amazon Linux)
 - Connected with SSH
 - Installed Nginx
@@ -18,10 +18,10 @@ what I did
 - Checked website with Public IP
 
 ## DAY 2 - GitHub CI/CD Automation
-Manual file editing on the server is inefficient.
-So I automated deployment using GitHub Actions.
+Manual file editing on the server is inefficient
+So I automated deployment using GitHub Actions
 
-what I did
+### What I did
 - Installed git locally
 - Created project files
 - Created GitHub Actions workflow
@@ -64,9 +64,9 @@ Installing nginx directly on the server:
 - hard to manage
 - environment dependent
 - not portable
-Docker solves this by running nginx inside containers.
+Docker solves this by running nginx inside containers
 
-what I did
+### What I did
 - Installed Docker
 - Fixed permission issue (docker group)
 - Ran nginx container
@@ -77,6 +77,7 @@ what I did
 - nginx runs inside Docker container
 - no direct installation on host
 - easier deployment & portability
+- Accessible via http://localhost:8080
 
 ## Screenshots
 ![Docker Success_Screenshot](./screenshots/dockertest.png)
@@ -86,6 +87,20 @@ what I did
 ![Docker_Build](./screenshots/docker-build.png)
 ![Docker_Run](./screenshots/docker-ps.png)
 ![Docker_Browsesr](./screenshots/docker-browser.png)
+
+## DAY 4 - GitHub Actions CI/CD Deployment
+Automatic deployment from GitHub to EC2
+Ensures updates website always live
+
+### What I did
+- Created GitHub Actions workflow for automatic deployment
+- Connected SSH key to EC2
+- Pushed code changes to GitHub
+- Confirmed website updated automatically on EC2 via Docker
+- Captured workflow logs and updated browser screen
+
+## Screenshots
+![Docker Success_Screenshot](./screenshots/dockertest.png)
 
 ## What I Learned
 - Linux server management
