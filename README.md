@@ -30,6 +30,7 @@ So I automated deployment using GitHub Actions
 
 ## Workflow file
 .github/workflows/deploy.yml
+
 name: Deploy to EC2
 
 on:
@@ -101,6 +102,7 @@ Ensures updates website always live
 
 ## Workflow file
 .github/workflows/deploy.yml
+
 name: Deploy to EC2
 
 on:
