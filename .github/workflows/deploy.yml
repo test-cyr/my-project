@@ -1,4 +1,4 @@
-name: Deploy to EC2
+name: CI/CD React to EC2
 
 on:
   push:
@@ -7,32 +7,44 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          cd my-app
+          npm install
+
+      - name: Build React app
+        run: |
+          cd my-app
+          npm run build
+
       - name: Copy files to EC2
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/scp-action@v0.1.6
         with:
           host: "${{ secrets.EC2_HOST }}"
           username: ec2-user
           key: "${{ secrets.EC2_KEY }}"
-          source: "."
-          target: "/home/ec2-user/project"
+          source: "my-app"
+          target: "/home/ec2-user/project/my-app"
 
-      - name: Build and run Docker on EC2
-        uses: appleboy/ssh-action@v0.1.7
+      - name: SSH & Deploy Docker
+        uses: appleboy/ssh-action@v0.1.6
         with:
           host: "${{ secrets.EC2_HOST }}"
           username: ec2-user
           key: "${{ secrets.EC2_KEY }}"
           script: |
-            cd /home/ec2-user/project
-
-            # 기존 컨테이너 제거
-            docker stop project || true
-            docker rm project || true
-
-            # Docker build & run
-            docker build -t project .
-            docker run -d -p 8080:80 --name project project
+            cd /home/ec2-user/project/my-app
+            docker build -t react-nginx .
+            docker stop react-app || true
+            docker tm react-app || true
+            docker run -d -p 80:80 -p 443:443 --name react-app react-nginx
