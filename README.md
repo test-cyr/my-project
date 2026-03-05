@@ -165,6 +165,15 @@ jobs:
 **Result**
 - Access the deployed web app via
 
+## DAY 5 - Docker + Nginx + React Deployment with HTTPS
+
+### What I did
+- Built a React app and created Dockerfile
+- Configured Nginx as reverse proxy
+- Exposed port 80 and 443 on EC2 security group
+- Deployed Dcker container with HTTPS enabled
+- Verified the application in the browser
+
 ## What I Learned
 - Linux server management
 - SSH remote access
