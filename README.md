@@ -147,6 +147,24 @@ jobs:
 ![Security_Group_Set](./screenshots/security-group.png)
 ![Docker Success_Browser](./screenshots/browser-updated.png)
 
+## Troubleshotting
+### Issue 1: GitHub Actions did not copy files to EC2
+
+**Situation**
+- GitHub Actions ran successfully, but files (Dockerfile, index.html) were missing on the EC2 server
+- The Docker container on EC2 is running on port `8080`
+
+**Cause**
+- The workflow did not include a proper step to copy project files to EC2
+- SCP/SSH action was not configured correctly
+
+**Solution**
+- Use `appleboy/scp-action` to copy all project files to EC2
+- Add an **inbound rule** to the EC2 Security Group
+
+**Result**
+- Access the deployed web app via
+
 ## What I Learned
 - Linux server management
 - SSH remote access
