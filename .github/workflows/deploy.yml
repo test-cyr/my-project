@@ -2,12 +2,12 @@ name: CI/CD React to EC2
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -32,8 +32,8 @@ jobs:
         with:
           host: "${{ secrets.EC2_HOST }}"
           username: ec2-user
-          key: "${{ secrets.EC2_KEY }}"
-          source: "my-app"
+          key: "${{ secrets.EC2_SSH_KEY }}"
+          source: "my-app/*"
           target: "/home/ec2-user/project/my-app"
 
       - name: SSH & Deploy Docker
@@ -41,10 +41,10 @@ jobs:
         with:
           host: "${{ secrets.EC2_HOST }}"
           username: ec2-user
-          key: "${{ secrets.EC2_KEY }}"
+          key: "${{ secrets.EC2_SSH_KEY }}"
           script: |
             cd /home/ec2-user/project/my-app
             docker build -t react-nginx .
             docker stop react-app || true
-            docker tm react-app || true
+            docker rm react-app || true
             docker run -d -p 80:80 -p 443:443 --name react-app react-nginx
