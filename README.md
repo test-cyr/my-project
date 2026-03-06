@@ -165,14 +165,35 @@ jobs:
 **Result**
 - Access the deployed web app via
 
-## DAY 5 - Docker + Nginx + React Deployment with HTTPS
+## DAY 5 - React App Deployment with Docker & EC2
 
 ### What I did
-- Built a React app and created Dockerfile
-- Configured Nginx as reverse proxy
-- Exposed port 80 and 443 on EC2 security group
-- Deployed Dcker container with HTTPS enabled
-- Verified the application in the browser
+- Prepared React app on locatl PC
+- Verified Dockerfile and docker-compose.yml in my-app folder
+- Pushed lates code to GitHub
+- Updated deploy.yml for EC2 deployment
+- Deployed React app using Docker via GitHub Actions
+- Verified app running in browser on EC2
+
+**Screenshoots**
+![Workflow_File](./screenshots/step3-deploy-yaml.png)
+![Docker_Container_Log](./screenshots/step5-docker-up.png)
+![React_App_In_Browser](./screenshots/step5-browser-react.png)
+
+## Troubleshotting
+### Issue 2: Dockerfile was duplicated in project root
+
+**Situation**
+- my-app folder contained correct Dockerfile, but Actions were targeting wrong path
+
+**Cause**
+- deploy.yml `source` and `target` paths were incorrect
+
+**Solution**
+- Deleted root Dockerfile
+
+**Result**
+- Deployment succeeded, React app live on EC2
 
 ## What I Learned
 - Linux server management
