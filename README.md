@@ -168,7 +168,7 @@ jobs:
 ## DAY 5 - React App Deployment with Docker & EC2
 
 ### What I did
-- Prepared React app on locatl PC
+- Prepared React app on local PC
 - Verified Dockerfile and docker-compose.yml in my-app folder
 - Pushed lates code to GitHub
 - Updated deploy.yml for EC2 deployment
