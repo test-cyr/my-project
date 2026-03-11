@@ -16,6 +16,8 @@ jobs:
       # React 프로젝트가 'my-app' 폴더 안에 있다면 아래 명령어로 에러를 낸다
       - name: Build Docker Image (Error Point)
         run: |
+          # cd my-app 성공시키기 위해 수정한 부분
+          cd my-app
           docker build -t my-react-app .
 
       # [성공 시나리오] 나중에 아래처럼 수정해서 성공 시킨다
