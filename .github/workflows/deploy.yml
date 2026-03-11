@@ -30,10 +30,12 @@ jobs:
           username: ec2-user
           key: "${{ secrets.EC2_KEY }}"
           script: |
-            # 서버 내부로 이동
-            cd ~/my-project
+            # 서버의 실제 프로젝트 폴더로 정확히 이동
+            cd /home/ec2-user/my-project
+            # 최신 코드 깃허브에서 가져오기
             git pull origin main
 
-            # Docker Compose로 컨테이너 재실행
+            # Docker Compose로 컨테이너 빌드 및 실행
+            # sudo가 필요할 수 있으니 안전하게 붙여준다
             # 서버에 설치된 docker-compose.yml을 사용해 빌드 및 실행
             sudo docker-compose up -d --build
