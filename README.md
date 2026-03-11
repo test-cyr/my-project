@@ -166,14 +166,15 @@ jobs:
 - Access the deployed web app via
 
 ## DAY 5 - React App Deployment with Docker & EC2
+Deploy local React app to EC2 using Docker and verify latest index.html in browser
 
 ### What I did
-- Prepared React app on local PC
-- Verified Dockerfile and docker-compose.yml in my-app folder
-- Pushed lates code to GitHub
-- Updated deploy.yml for EC2 deployment
-- Deployed React app using Docker via GitHub Actions
-- Verified app running in browser on EC2
+- Built React app locally (npm run build)
+- Checked and updated Dockerfile and docker-compose.yml
+- Committed and pushed code to GitHub -> triggered GitHub Actions for EC2 deplyoment
+- Ran Dockaer container on EC2
+- Opened ports 8080 and 443 in Security Group
+- Verified React app in browser
 
 **Screenshoots**
 ![Workflow_File](./screenshots/step3-deploy-yaml.png)
@@ -202,7 +203,6 @@ jobs:
 - Git workflow
 - CI/CD automation with GitHub Actions
 - Docker containerization
-- Real-world deployment process
 - AWS Security Group settings (Opening port 8080)
 
 ## Next Steps (Planned)
