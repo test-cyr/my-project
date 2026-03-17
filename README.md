@@ -148,7 +148,7 @@ jobs:
 ![Docker Success_Browser](./screenshots/browser-updated.png)
 
 ## Troubleshotting
-### Issue 1: GitHub Actions did not copy files to EC2
+### Issue: GitHub Actions did not copy files to EC2
 
 **Situation**
 - GitHub Actions ran successfully, but files (Dockerfile, index.html) were missing on the EC2 server
@@ -166,35 +166,33 @@ jobs:
 - Access the deployed web app via
 
 ## DAY 5 - React App Deployment with Docker & EC2
-Deploy local React app to EC2 using Docker and verify latest index.html in browser
+Deploying a React application to AWS EC2 using Docker and Docker Compose with a fully automated CI/CD pipeline via GitHub Actions
 
 ### What I did
-- Built React app locally (npm run build)
-- Checked and updated Dockerfile and docker-compose.yml
-- Committed and pushed code to GitHub -> triggered GitHub Actions for EC2 deplyoment
-- Ran Dockaer container on EC2
-- Opened ports 8080 and 443 in Security Group
-- Verified React app in browser
+- Created a Multi-stage Dockerfile to optimize image size and security
+- Managed the web server and application environment consistently
+- Configured GitHub Actions to build and deploy the Docker image automatically upon pushing to the main brance
 
 **Screenshoots**
-![Workflow_File](./screenshots/step3-deploy-yaml.png)
-![Docker_Container_Log](./screenshots/step5-docker-up.png)
-![React_App_In_Browser](./screenshots/step5-browser-react.png)
+![Failure_Log](./screenshots/step2-ci-cd-failure-log.png)
+![Success_Log](./screenshots/step3-ci-cd-success-pipeline.png)
+![Docker_PS](./screenshots/step4-ec2-docker-ps.png)
+![React_App_In_Browser](./screenshots/step5-ec2-live-production.png)
 
 ## Troubleshotting
-### Issue 2: Dockerfile was duplicated in project root
+### Issue: Docker Build Faailure in CI/CD Pipeline
 
 **Situation**
-- my-app folder contained correct Dockerfile, but Actions were targeting wrong path
+- GitHub Actions failed during the "Build Docker Image" step
 
 **Cause**
-- deploy.yml `source` and `target` paths were incorrect
+- The workflow was searching for the Dockerfile in the root directory, but it was located in the /my-app subdirectory
 
 **Solution**
-- Deleted root Dockerfile
+- Updated the context and file pathes in deploy.yml to correctly point the project folder
 
 **Result**
-- Deployment succeeded, React app live on EC2
+- Successfully automated the build and deployment process
 
 ## What I Learned
 - Linux server management
@@ -204,6 +202,7 @@ Deploy local React app to EC2 using Docker and verify latest index.html in brows
 - CI/CD automation with GitHub Actions
 - Docker containerization
 - AWS Security Group settings (Opening port 8080)
+- Docker ensures the app runs the same on my local machine and the AWS server
 
 ## Next Steps (Planned)
 - Docker Compose
